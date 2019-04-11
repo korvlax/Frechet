@@ -90,7 +90,7 @@ def main():
     masked_dir = '/home/thesis/code/squeezedet-keras/data/ground_meeting_masked_120_120_2019-03-28_17_01_56-636265'
     real_dir = '/home/thesis/code/squeezedet-keras/data/ground_real/headclick-01001452'
 
-    synth = read_imgs(synth)
+    synth = read_imgs(synth_dir)
     masked = read_imgs(masked_dir)
     real = read_imgs(real_dir)
     
