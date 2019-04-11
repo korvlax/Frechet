@@ -15,6 +15,8 @@ import tensorflow as tf
 import os, sys
 import functools
 import numpy as np
+import cv2
+import glob
 import time
 from tensorflow.python.ops import array_ops
 from tensorflow.python.ops import functional_ops
@@ -76,3 +78,26 @@ def get_fid(images1, images2):
     fid = activations2distance(act1, act2)
     print('FID calculation time: %f s' % (time.time() - start_time))
     return fid
+
+
+def read_imgs(dir_path):
+    imgs = [cv2.imread(f) for f in glob.glob(dir_path + '*png')]
+    imgs = np.array(imgs)
+    return imgs
+
+def main():
+    synth_dir = '/home/thesis/code/squeezedet-keras/data/ground_meeting_masked_synth'
+    masked_dir = '/home/thesis/code/squeezedet-keras/data/ground_meeting_masked_120_120_2019-03-28_17_01_56-636265'
+    real_dir = '/home/thesis/code/squeezedet-keras/data/ground_real/headclick-01001452'
+
+    synth = read_imgs(synth)
+    masked = read_imgs(masked_dir)
+    real = read_imgs(real_dir)
+    
+    fid_sr = get_fid(synth, real)
+    fid_mr = get_fid(masked, real)
+    print('fid_sr, fid_mr')
+    print(fid_sr, fid_mr)
+  
+if __name__== "__main__":
+  main()
