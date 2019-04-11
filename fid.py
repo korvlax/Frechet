@@ -91,6 +91,7 @@ def main():
     real_dir = '/home/thesis/code/squeezedet-keras/data/ground_real/headclick-01001452'
 
     synth = read_imgs(synth_dir)
+    print(synth.shape)
     masked = read_imgs(masked_dir)
     real = read_imgs(real_dir)
     
